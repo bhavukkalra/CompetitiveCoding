@@ -134,10 +134,42 @@ node* reverse_linked_list()
     }
 
     return prev;
+}
+// requires an input
+// actuall prints in reverse order
+void show_recursive(node *temp_head)
+{
+
+	if(temp_head == NULL)
+	return;
+	// print the list till next element untill the last
+	// i can print the current element
+	show_recursive(temp_head -> next);
+	cout << temp_head-> value; 
 
 
 
+}
 
+void reversell_recursive(node *temp_head)
+{
+	//base case
+	if(temp_head -> next == NULL)
+	{
+		head = temp_head;
+		// IMP last node = first node ----------------
+		return;
+	}
+	// hypothesis
+	// reverse ll till second node ie next
+	reversell_recursive(temp_head -> next);
+
+	//assuming ll till second node is reversed
+	// we can reverse the first link
+
+	node *p = temp_head -> next;
+	p -> next = temp_head;
+	temp_head -> next = NULL;
 }
 int main() 
 {
@@ -145,12 +177,16 @@ int main()
 	insert(2);
 	insert(3);
     insert(6);
-    show();
-    cout << endl;
-    head = reverse_linked_list();
-    cout << endl;
+
 	
+	
+	node *temp_head = head;
+	reversell_recursive(temp_head);
+	// head assigned inside function
 	show();
+	
+	
+	
 	
 	
 	
